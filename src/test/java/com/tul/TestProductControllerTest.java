@@ -52,8 +52,9 @@ class TestProductControllerTest {
 
         List<testCase> testCases = new ArrayList<testCase>(){{
            add(new testCase("getProductsSuccess", "/items/v1/products", HttpStatus.OK.value(), "[{\"productId\":1,\"productName\":\"iPhone\",\"price\":70000.0},{\"productId\":2,\"productName\":\"appo\",\"price\":10000.0}]"));
-            add(new testCase("getProduct", "/items/v1/products/1",HttpStatus.OK.value(), "{\"productId\":1,\"productName\":\"iPhone\",\"price\":70000.0}"));
-            add(new testCase("getProduct", "/items/v1/products/5",HttpStatus.NO_CONTENT.value(), "{\"errorCode\":\"204 NO_CONTENT\",\"errorMessage\":\"Product Not found\",\"statusCode\":\"204 NO_CONTENT\"}"));
+            add(new testCase("getProductsIdSuccess", "/items/v1/products/1",HttpStatus.OK.value(), "{\"productId\":1,\"productName\":\"iPhone\",\"price\":70000.0}"));
+            add(new testCase("getProductNoContent", "/items/v1/products/5",HttpStatus.NO_CONTENT.value(), "{\"errorCode\":\"204 NO_CONTENT\",\"errorMessage\":\"Product Not found\",\"statusCode\":\"204 NO_CONTENT\"}"));
+            add(new testCase("getNotFound", "/items/v1/produc",HttpStatus.NOT_FOUND.value(), ""));
         }};
 
         for (testCase tc:testCases) {
