@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping(value="items/v1")
 public class ProductController {
-
     private HashMap<Integer, Product> productRepo = new HashMap<Integer, Product>();
     public HashMap<Integer, Product> fetchProducts(){
         Product iPhone = new Product();
@@ -40,10 +41,14 @@ public class ProductController {
 
     @RequestMapping(value="/products/{id}")
     public ResponseEntity<Object>getProduct(@PathVariable("id") Integer id){
+        long beginTime = System.currentTimeMillis();
+        long responseTime;
         HashMap<Integer, Product> productRepo = fetchProducts();
         if (!productRepo.containsKey(id)){
+            responseTime = System.currentTimeMillis() - beginTime;
             throw new ProductNotFoundException();
         }
+        responseTime = System.currentTimeMillis() - beginTime;
         return new ResponseEntity<>(productRepo.get(id), HttpStatus.OK);
     }
 

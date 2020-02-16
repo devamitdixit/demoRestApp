@@ -25,5 +25,6 @@ repositories{
 
 dependencies{
     compile('org.springframework.boot:spring-boot-starter-web')
+//    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
